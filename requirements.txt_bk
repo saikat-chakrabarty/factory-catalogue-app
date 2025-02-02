@@ -1,0 +1,13 @@
+fastapi==0.85.0
+uvicorn[standard]==0.18.0
+pydantic==1.10.0
+python-dotenv==0.21.0
+sqlalchemy==1.4.x
+alembic==1.7.x
+# Dev requirements below (should be installed separately in dev)
+flake8==4.0.0
+black==22.0.0
+isort==5.10.0
+mypy==0.930
+pytest==7.0.0
+pre-commit==2.20.0

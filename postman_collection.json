@@ -1,0 +1,68 @@
+{
+	"info": {
+		"_postman_id": "40cf2f19-0667-4f42-9a6e-3fb6d050dfd5",
+		"name": "Demo Factory App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Factories",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8001/factories/?location=kolkata&product=steel",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"factories",
+						""
+					],
+					"query": [
+						{
+							"key": "location",
+							"value": "kolkata"
+						},
+						{
+							"key": "product",
+							"value": "steel"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Factory",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Kolkata Steel Factory\",\n  \"location\": \"Kolkata\",\n  \"product\": \"Steel\",\n  \"raw_materials\": [\n    \"iron\",\"coal\"\n  ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/factories/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"factories",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
