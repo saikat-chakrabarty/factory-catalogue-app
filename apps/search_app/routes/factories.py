@@ -9,32 +9,38 @@ from libs.catalogue.db import get_db
 
 router = APIRouter(prefix="/factories", tags=["Factories Search"])
 
+
 @router.get("/", response_model=List[schemas.FactoryResponse])
 def search_factories(
     location: Optional[str] = None,
     raw_material: Optional[List[str]] = Query(None, alias="raw_material"),
     product: Optional[str] = Query(None, alias="product"),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
 ):
     """
     User endpoint: Search factories by location, raw material, or product.
     You can pass multiple `raw_material` and `product` query parameters.
     """
     query = db.query(models.Factory)
-    
+
     if location:
         query = query.filter(models.Factory.location.ilike(f"%{location}%"))
-    
+
     if raw_material:
         # Filter factories that have at least one matching raw material name.
         query = query.filter(
-            and_(*[models.Factory.raw_materials.any(models.RawMaterial.name.ilike(f"%{rm}%"))
-                  for rm in raw_material])
+            and_(
+                *[
+                    models.Factory.raw_materials.any(
+                        models.RawMaterial.name.ilike(f"%{rm}%")
+                    )
+                    for rm in raw_material
+                ]
+            )
         )
-    
+
     if product:
-        query = query.filter(
-            and_(models.Factory.product.ilike(f"%{product}%")))
-    
+        query = query.filter(and_(models.Factory.product.ilike(f"%{product}%")))
+
     factories = query.all()
     return factories

@@ -23,9 +23,7 @@ Type-check: mypy .
 
 ## Running the Application
 # Set Up Environment Variables:
-
-Copy the example file and modify as needed:
-cp .env.example .env_<environment>
+export ENV_FILE=.env_<environment>
 
 # Install Dependencies:
 Using Poetry:

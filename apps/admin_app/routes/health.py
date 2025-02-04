@@ -4,6 +4,7 @@ from sqlalchemy.exc import OperationalError
 
 router = APIRouter(prefix="/health", tags=["Health"])
 
+
 @router.get("/")
 async def health_check():
     try:

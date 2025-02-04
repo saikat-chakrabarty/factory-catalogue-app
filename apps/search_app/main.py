@@ -17,6 +17,7 @@ register_exception_handlers(app)
 # Include search routes.
 app.include_router(factories.router)
 
+
 @app.get("/")
 async def root():
     return {"message": "Welcome to the Factory Search App!"}
