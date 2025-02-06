@@ -7,8 +7,10 @@ from sqlalchemy import and_
 from libs.catalogue import models, schemas
 from libs.catalogue.db import get_db
 
-router = APIRouter(prefix="/factories", tags=["Factories Search"])
+import logging
 
+logger = logging.getLogger(__name__)
+router = APIRouter(prefix="/factories", tags=["Factories Search"])
 
 @router.get("/", response_model=List[schemas.FactoryResponse])
 def search_factories(
@@ -16,11 +18,14 @@ def search_factories(
     raw_material: Optional[List[str]] = Query(None, alias="raw_material"),
     product: Optional[str] = Query(None, alias="product"),
     db: Session = Depends(get_db),
-):
+    ):
     """
     User endpoint: Search factories by location, raw material, or product.
     You can pass multiple `raw_material` and `product` query parameters.
     """
+    # print request body in debug log
+    logger.debug(f"Request body: {location}, {raw_material}, {product}")
+
     query = db.query(models.Factory)
 
     if location:
@@ -43,4 +48,6 @@ def search_factories(
         query = query.filter(and_(models.Factory.product.ilike(f"%{product}%")))
 
     factories = query.all()
+    logging.info(f"Found {len(factories)} factories")
+
     return factories

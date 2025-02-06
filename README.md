@@ -8,53 +8,7 @@ A production-ready FastAPI project template that follows modern software enginee
 - [Setup & Installation](#setup--installation)
 - [Development Workflow](#development-workflow)
 - [Running the Application](#running-the-application)
-- [Testing](#testing)
-- [Contributing](#contributing)
-
-
-## Development Workflow
-# Pre-commit Hooks: Pre-commit hooks ensure code quality. They run automatically before commits. To install the hooks, run:
-pre-commit install
-
-# Code Formatting & Linting:
-Format code: black .
-Lint code: flake8 .
-Type-check: mypy .
-
-## Running the Application
-# Set Up Environment Variables:
-export ENV_FILE=.env_<environment>
-
-# Install Dependencies:
-Using Poetry:
-pyenv local 3.13.1
-poetry env use /usr/bin/python3.1
-poetry env info
-poetry install
-Or, with pip:
-pip3 install -r requirements.txt
-
-# Run Database Migrations:
-
-After updating the models, generate and apply an Alembic migration:
-alembic revision --autogenerate -m "Add raw_materials and association table"
-alembic upgrade head
-
-# Run the Admin App:
-source venv/bin/activate
-uvicorn apps.admin_app.main:app --reload --port 8000
-
-# Run the Search App (in a separate terminal):
-source venv/bin/activate
-uvicorn apps.search_app.main:app --reload --port 8001
-
-# Login to DB
-sudo su - postgres
-psql 
-
-# Get API doc
-http://localhost:8000/docs#/
-http://localhost:8001/docs#/
+- [API Docs](#api-docs)
 
 
 ## Project Structure
@@ -96,8 +50,67 @@ production-fastapi-template/
 │   ├── env.py
 │   ├── script.py.mako
 │   └── versions/
-├── .env.example
+├── .env_development
+├── .env_production
 ├── pyproject.toml
 ├── requirements.txt
 ├── pre-commit-config.yaml
 └── README.md
+└── requirements.txt
+└── setup.cfg
+
+
+## Setup & Installation:
+Using Pip and Venv:
+python3 -m venv venv
+source venv/bin/activate
+pip3 install -r requirements.txt
+OR
+Using Poetry and Pyenv:
+pyenv local 3.13.1
+poetry env use /usr/bin/python3.13.1
+poetry env info
+poetry install
+
+
+## Development Workflow
+# Pre-commit Hooks: Pre-commit hooks ensure code quality. They run automatically before commits. To install the hooks, run:
+pre-commit install
+
+# Code Formatting & Linting:
+Format code: black .
+Lint code: flake8 .
+Type-check: mypy .
+Unit Test: pytest tests/test_admin_app.py tests/test_search_app.py tests/conftest.py --disable-warnings
+
+
+## Running the Application
+# Run the Admin App:
+export ENV_FILE=.env_<environment>
+source venv/bin/activate
+uvicorn apps.admin_app.main:app --reload --port 8000
+
+# Run the Search App (in a separate terminal):
+export ENV_FILE=.env_<environment>
+source venv/bin/activate
+uvicorn apps.search_app.main:app --reload --port 8001
+
+# Run Database Migrations:
+Initialize:
+alembic init alembic
+After updating the models, generate and apply an Alembic migration:
+alembic revision --autogenerate -m "Add raw_materials and association table"
+alembic upgrade head
+To revert:
+alembic downgrade -1
+
+# Login to DB
+sudo su - postgres
+psql 
+
+
+## API Docs
+http://localhost:8000/docs#/
+http://localhost:8001/docs#/
+
+
