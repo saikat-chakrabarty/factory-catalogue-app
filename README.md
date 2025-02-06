@@ -1,6 +1,6 @@
 # Production-Ready FastAPI Template
 
-A production-ready FastAPI project template that follows modern software engineering practices. It features a monorepo structure with shared libraries, deterministic dependency management, structured logging, middleware for observability, robust API design, PostgreSQL integration with Alembic migrations, and comprehensive testing support.
+A production-ready FastAPI project template for a simple factory management app. It features a monorepo structure with shared libraries, deterministic dependency management, structured logging, middleware for observability, robust API design, PostgreSQL integration with Alembic migrations and unit testing support.
 
 ## Table of Contents
 
