@@ -9,7 +9,7 @@ class RawMaterialResponse(RawMaterialBase):
     id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 # Shared fields for Factory.
 class FactoryBase(BaseModel):
@@ -27,4 +27,4 @@ class FactoryResponse(FactoryBase):
     raw_materials: List[RawMaterialResponse]
 
     class Config:
-        orm_mode = True
+        from_attributes = True

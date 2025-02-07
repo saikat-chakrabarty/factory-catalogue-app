@@ -21,7 +21,7 @@ class RequestContextMiddleware(BaseHTTPMiddleware):
         response.headers["X-Process-Time"] = f"{process_time:.3f}"
         response.headers["X-Git-Commit"] = settings.GIT_COMMIT_SHA
 
-        logger.info("Request processed", extra={"request_id": request_id, "process_time": process_time})
+        logger.debug(f"Processed request_id: {request_id}, process_time: {process_time}")
         return response
 
 def add_custom_middleware(app):

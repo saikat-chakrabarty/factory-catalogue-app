@@ -54,6 +54,6 @@ def create_factory(factory: schemas.FactoryCreate, db: Session = Depends(get_db)
     db.add(new_factory)
     db.commit()
     db.refresh(new_factory)
-    logging.info(f"Factory created: {new_factory}")
+    logging.info(f"Factory created: {new_factory.id}")
     
     return new_factory

@@ -23,8 +23,7 @@ def search_factories(
     User endpoint: Search factories by location, raw material, or product.
     You can pass multiple `raw_material` and `product` query parameters.
     """
-    # print request body in debug log
-    logger.debug(f"Request body: {location}, {raw_material}, {product}")
+    logging.debug(f"Request body: location={location}, raw_material={raw_material}, product={product}")
 
     query = db.query(models.Factory)
 

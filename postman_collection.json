@@ -11,7 +11,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8001/factories/?location=kolkata&product=steel",
+					"raw": "http://localhost:8001/factories/?location=kolkata&product=steel&raw_material=iron",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -29,6 +29,10 @@
 						{
 							"key": "product",
 							"value": "steel"
+						},
+						{
+							"key": "raw_material",
+							"value": "iron"
 						}
 					]
 				}
@@ -42,7 +46,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"name\": \"Kolkata Steel Factory\",\n  \"location\": \"Kolkata\",\n  \"product\": \"Steel\",\n  \"raw_materials\": [\n    \"iron\",\"coal\"\n  ]\n}",
+					"raw": "{\n  \"name\": \"Ahmedabad Textile Factory\",\n  \"location\": \"Ahmedabad\",\n  \"product\": \"Apparel\",\n  \"raw_materials\": [\n    \"cotton\",\"dye\"\n  ]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
